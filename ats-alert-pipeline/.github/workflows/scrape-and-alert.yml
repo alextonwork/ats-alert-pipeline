@@ -1,0 +1,44 @@
+name: Scrape ATS boards and alert
+
+on:
+  schedule:
+    - cron: "*/20 * * * *"
+  workflow_dispatch: {}
+
+# Prevent overlapping runs from racing on the same state files
+concurrency:
+  group: scrape-and-alert
+  cancel-in-progress: false
+
+jobs:
+  scrape:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repo
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: pip install requests
+
+      - name: Run scrape
+        working-directory: scripts
+        run: python scrape.py
+
+      - name: Filter and alert
+        working-directory: scripts
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+        run: python filter_and_alert.py
+
+      - name: Commit updated state
+        run: |
+          git config user.name "ats-alert-bot"
+          git config user.email "actions@github.com"
+          git add data/latest_jobs.json data/seen_jobs.json data/volume_baseline.json data/companies.json
+          git diff --cached --quiet || git commit -m "chore: update job state [skip ci]"
+          git push

@@ -1,0 +1,57 @@
+{
+  "keywords": {
+    "title_include_any": [
+      "electrical engineer",
+      "electrical engineering",
+      "embedded",
+      "firmware",
+      "hardware engineer",
+      "machine learning",
+      "ml engineer",
+      "ai engineer",
+      "artificial intelligence",
+      "data scientist",
+      "data science",
+      "data engineer",
+      "data analyst",
+      "computer vision",
+      "robotics",
+      "controls engineer",
+      "signal processing"
+    ],
+    "title_exclude_any": [
+      "senior",
+      "staff",
+      "principal",
+      "director",
+      "manager",
+      "lead ",
+      "vp ",
+      "vice president"
+    ],
+    "require_internship_or_entry": true,
+    "internship_terms": ["intern", "internship", "co-op", "coop", "new grad", "entry level", "entry-level"]
+  },
+  "locations": {
+    "include_any": [
+      "bay area", "san francisco", "sf", "san jose", "palo alto", "mountain view",
+      "sunnyvale", "santa clara", "redwood city", "menlo park", "atherton",
+      "san mateo", "fremont", "oakland", "berkeley", "peninsula",
+      "las vegas", "nevada", "unlv",
+      "remote"
+    ]
+  },
+  "platforms": {
+    "greenhouse": {"enabled": true, "max_workers": 20},
+    "lever": {"enabled": true, "max_workers": 20},
+    "ashby": {"enabled": true, "max_workers": 10},
+    "workday": {"enabled": false, "max_workers": 10, "note": "no stable public JSON pattern yet, enable per-company only"}
+  },
+  "run": {
+    "request_timeout_seconds": 12,
+    "max_retries": 3,
+    "backoff_base_seconds": 2,
+    "dead_slug_failure_threshold": 10,
+    "anomaly_drop_fraction": 0.5
+  }
+}

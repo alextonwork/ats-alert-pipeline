@@ -1,0 +1,39 @@
+name: Discover new companies
+
+on:
+  schedule:
+    - cron: "0 13 * * 1"  # Mondays 1pm UTC — weekly, off the hot path of the alert loop
+  workflow_dispatch: {}
+
+concurrency:
+  group: discover-companies
+  cancel-in-progress: false
+
+jobs:
+  discover:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repo
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: pip install requests
+
+      - name: Run discovery
+        working-directory: scripts
+        env:
+          SEARCH_API_KEY: ${{ secrets.SEARCH_API_KEY }}
+        run: python discover_companies.py
+
+      - name: Commit new companies
+        run: |
+          git config user.name "ats-alert-bot"
+          git config user.email "actions@github.com"
+          git add data/companies.json
+          git diff --cached --quiet || git commit -m "chore: discover new companies [skip ci]"
+          git push
