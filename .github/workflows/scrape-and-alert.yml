@@ -1,6 +1,11 @@
 name: Scrape ATS boards and alert
 
 on:
+  # Note: the schedule trigger fired once after this workflow was created,
+  # then went silent for 2+ hours despite no changes on our end -- a known
+  # GitHub Actions platform quirk for new repos/schedules, not a config bug.
+  # This comment exists to force a fresh push and see if it "wakes" the
+  # scheduler back up.
   schedule:
     - cron: "*/20 * * * *"
   workflow_dispatch: {}
