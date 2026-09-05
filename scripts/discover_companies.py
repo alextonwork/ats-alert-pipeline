@@ -94,7 +94,8 @@ def search_web(query):
         data = resp.json()
         return [item["link"] for item in data.get("items", [])]
     except requests.RequestException as e:
-        print(f"Search failed for '{query}': {e}", file=sys.stderr)
+        detail = e.response.text[:500] if e.response is not None else ""
+        print(f"Search failed for '{query}': {e} | {detail}", file=sys.stderr)
         return []
 
 
