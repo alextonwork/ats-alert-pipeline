@@ -41,4 +41,5 @@ jobs:
           git config user.email "actions@github.com"
           git add data/latest_jobs.json data/seen_jobs.json data/volume_baseline.json data/companies.json
           git diff --cached --quiet || git commit -m "chore: update job state [skip ci]"
+          git pull --rebase --autostash
           git push

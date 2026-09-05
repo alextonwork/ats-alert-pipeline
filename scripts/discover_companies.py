@@ -12,10 +12,12 @@ Common Crawl re-implementation. It runs weekly, not daily, because new
 company boards don't appear fast enough to need tighter monitoring, and
 because search-API usage is the part worth rationing.
 
-Requires a search API. This script is written against Bing Web Search
-syntax as an example; swap in whatever search API you actually have
-access to (Google Programmable Search, SerpApi, etc.) — the slug
-extraction and validation logic downstream doesn't change.
+Uses the Google Programmable Search Engine (Custom Search JSON API).
+Free tier is 100 queries/day; this script issues 12 queries/run
+(4 search terms x 3 ATS platforms), well within that. Requires two
+secrets: SEARCH_API_KEY (a Custom Search JSON API key) and
+SEARCH_ENGINE_ID (the search engine's "cx" value) — both come from
+https://programmablesearchengine.google.com/.
 """
 
 import json
@@ -32,7 +34,8 @@ ROOT = Path(__file__).resolve().parent.parent
 COMPANIES_PATH = ROOT / "data" / "companies.json"
 CONFIG_PATH = ROOT / "config.json"
 
-SEARCH_API_KEY = os.environ.get("SEARCH_API_KEY")  # set as a GitHub secret
+SEARCH_API_KEY = os.environ.get("SEARCH_API_KEY")  # Custom Search JSON API key
+SEARCH_ENGINE_ID = os.environ.get("SEARCH_ENGINE_ID")  # the search engine's "cx" value
 
 # ATS domain patterns and how to pull the slug out of a matched URL
 BOARD_PATTERNS = {
@@ -73,23 +76,23 @@ def save_json(path, data):
 
 
 def search_web(query):
-    """Bing Web Search API example. Returns a list of result URLs.
-    Swap this out for whichever search API you provision — see module
-    docstring. Returns [] (not an exception) on any failure, since a
-    failed search for one term shouldn't stop the whole discovery run."""
-    if not SEARCH_API_KEY:
-        print("SEARCH_API_KEY not set — skipping web discovery this run.", file=sys.stderr)
+    """Google Programmable Search Engine (Custom Search JSON API). Returns a
+    list of result URLs. Returns [] (not an exception) on any failure, since
+    a failed search for one term shouldn't stop the whole discovery run.
+    Google's API caps each request at 10 results (the `num` param) — no
+    pagination here since 10 results/term is plenty for slug discovery."""
+    if not SEARCH_API_KEY or not SEARCH_ENGINE_ID:
+        print("SEARCH_API_KEY/SEARCH_ENGINE_ID not set — skipping web discovery this run.", file=sys.stderr)
         return []
     try:
         resp = requests.get(
-            "https://api.bing.microsoft.com/v7.0/search",
-            headers={"Ocp-Apim-Subscription-Key": SEARCH_API_KEY},
-            params={"q": query, "count": 50},
+            "https://www.googleapis.com/customsearch/v1",
+            params={"key": SEARCH_API_KEY, "cx": SEARCH_ENGINE_ID, "q": query, "num": 10},
             timeout=10,
         )
         resp.raise_for_status()
         data = resp.json()
-        return [item["url"] for item in data.get("webPages", {}).get("value", [])]
+        return [item["link"] for item in data.get("items", [])]
     except requests.RequestException as e:
         print(f"Search failed for '{query}': {e}", file=sys.stderr)
         return []

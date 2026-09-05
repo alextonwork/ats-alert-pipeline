@@ -28,6 +28,7 @@ jobs:
         working-directory: scripts
         env:
           SEARCH_API_KEY: ${{ secrets.SEARCH_API_KEY }}
+          SEARCH_ENGINE_ID: ${{ secrets.SEARCH_ENGINE_ID }}
         run: python discover_companies.py
 
       - name: Commit new companies
@@ -36,4 +37,5 @@ jobs:
           git config user.email "actions@github.com"
           git add data/companies.json
           git diff --cached --quiet || git commit -m "chore: discover new companies [skip ci]"
+          git pull --rebase --autostash
           git push
