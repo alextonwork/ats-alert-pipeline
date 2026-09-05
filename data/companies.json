@@ -27,12 +27,12 @@
   "_meta": {
     "note": "This is a small starter seed, not the full target list. Add any company you personally know about by appending its ATS slug (found in its careers URL) to the right array. The discover_companies.py script also appends new slugs here automatically after validating them.",
     "dead_slugs": {
-      "greenhouse:doordash": 7,
-      "lever:eventbrite": 7,
-      "lever:plaid": 7,
-      "lever:netflix": 7,
-      "lever:shopify": 7,
-      "lever:rippling": 7
+      "greenhouse:doordash": 8,
+      "lever:eventbrite": 8,
+      "lever:plaid": 8,
+      "lever:netflix": 8,
+      "lever:shopify": 8,
+      "lever:rippling": 8
     },
     "removed_dead_slugs": []
   }
