@@ -90,6 +90,16 @@ def run_scrape():
                 removed.append({"platform": platform, "slug": slug, "reason": "exceeded failure threshold"})
             del dead_slugs[key]
 
+    # Keep full description text only for jobs that already match a topic
+    # keyword — internship/level cues often live in the body, not the title,
+    # but persisting every job's full description would balloon the committed
+    # state file for the ~95% of jobs that are never going to match anyway.
+    title_include_any = config.get("keywords", {}).get("title_include_any", [])
+    for job in all_jobs:
+        title = job.get("title", "").lower()
+        if not any(term in title for term in title_include_any):
+            job["description"] = ""
+
     save_json(COMPANIES_PATH, companies)
     save_json(OUTPUT_PATH, {
         "jobs": all_jobs,

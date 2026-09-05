@@ -7,10 +7,28 @@ returns a normalized list of job dicts, or raises a `CompanyFetchError` that
 callers can catch per-company without aborting the whole batch.
 """
 
+import html as html_module
+import re
 import time
 import requests
 
 USER_AGENT = "ats-alert-pipeline/1.0 (personal job-search alert tool)"
+
+_TAG_RE = re.compile(r"<[^>]+>")
+
+
+def _strip_html(raw):
+    """Cheap HTML-to-text: good enough for substring keyword matching,
+    not meant to preserve formatting. Greenhouse's content field comes back
+    HTML-entity-encoded (tags appear as "&lt;p&gt;" not "<p>"), so unescape
+    before stripping tags, then unescape again to resolve entities that were
+    inside the tag-free text (e.g. "&amp;amp;" -> "&amp;" -> "&")."""
+    if not raw:
+        return ""
+    text = html_module.unescape(raw)
+    text = _TAG_RE.sub(" ", text)
+    text = html_module.unescape(text)
+    return re.sub(r"\s+", " ", text).strip()
 
 
 class CompanyFetchError(Exception):
@@ -74,6 +92,7 @@ def fetch_greenhouse(slug, timeout=12, max_retries=3, backoff_base=2):
             "url": j.get("absolute_url", ""),
             "job_id": str(j.get("id", "")),
             "updated_at": j.get("updated_at", ""),
+            "description": _strip_html(j.get("content", "")),
         })
     return jobs
 
@@ -88,6 +107,7 @@ def fetch_lever(slug, timeout=12, max_retries=3, backoff_base=2):
     jobs = []
     for j in data:
         categories = j.get("categories", {}) or {}
+        description = j.get("descriptionPlain") or _strip_html(j.get("description", ""))
         jobs.append({
             "company": slug,
             "platform": "lever",
@@ -96,6 +116,7 @@ def fetch_lever(slug, timeout=12, max_retries=3, backoff_base=2):
             "url": j.get("hostedUrl", ""),
             "job_id": str(j.get("id", "")),
             "updated_at": str(j.get("createdAt", "")),
+            "description": description,
         })
     return jobs
 
@@ -117,6 +138,7 @@ def fetch_ashby(slug, timeout=12, max_retries=3, backoff_base=2):
             "url": j.get("jobUrl", ""),
             "job_id": str(j.get("id", "")),
             "updated_at": j.get("publishedAt", ""),
+            "description": _strip_html(j.get("descriptionHtml", "")),
         })
     return jobs
 

@@ -10,6 +10,7 @@ alert about that too — separately from job matches.
 import hashlib
 import json
 import os
+import re
 import sys
 from pathlib import Path
 
@@ -44,6 +45,14 @@ def job_key(job):
     return hashlib.sha256(raw.encode()).hexdigest()[:16]
 
 
+def _any_whole_word(terms, text):
+    """Word-boundary match, not naive substring — "intern" must not match
+    inside "internal audit", which naive `in` matching would happily do
+    once we started scanning full job description bodies instead of just
+    titles."""
+    return any(re.search(rf"\b{re.escape(term)}\b", text) for term in terms)
+
+
 def matches_filters(job, config):
     title = job.get("title", "").lower()
     location = job.get("location", "").lower()
@@ -59,7 +68,11 @@ def matches_filters(job, config):
         return False
 
     if kw.get("require_internship_or_entry"):
-        if not any(term in title for term in kw["internship_terms"]):
+        # Level/internship cues often live in the job description body rather
+        # than the title, so check both.
+        description = job.get("description", "").lower()
+        text = f"{title} {description}"
+        if not _any_whole_word(kw["internship_terms"], text):
             return False
 
     if loc["include_any"]:
