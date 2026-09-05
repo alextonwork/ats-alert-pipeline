@@ -1,0 +1,25 @@
+name: Send test Slack alert
+
+on:
+  workflow_dispatch: {}
+
+jobs:
+  test-alert:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repo
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: pip install requests
+
+      - name: Send test alert
+        working-directory: scripts
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+        run: python send_test_alert.py
