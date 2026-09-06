@@ -2,7 +2,7 @@ name: Discover new companies
 
 on:
   schedule:
-    - cron: "0 13 * * 1"  # Mondays 1pm UTC — weekly, off the hot path of the alert loop
+    - cron: "0 13 * * *"  # daily at 1pm UTC — 12 queries/day is well within Brave's free tier (2,000/month)
   workflow_dispatch: {}
 
 concurrency:
