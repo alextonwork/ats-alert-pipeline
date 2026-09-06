@@ -12,6 +12,7 @@ import json
 import os
 import re
 import sys
+from datetime import datetime, timezone
 from pathlib import Path
 
 import requests
@@ -82,16 +83,40 @@ def matches_filters(job, config):
     return True
 
 
+def _format_posted_at(raw):
+    """updated_at comes back in different shapes per platform -- ISO 8601
+    for Greenhouse/Ashby, epoch milliseconds (as a string) for Lever.
+    Check for a pure-digit string first: fromisoformat is lenient enough
+    in newer Python to misparse a 13-digit epoch value as a garbled date
+    (e.g. "1757090400000" -> year 1757) rather than raising."""
+    if not raw:
+        return "date unknown"
+    raw_str = str(raw)
+    if raw_str.isdigit():
+        try:
+            dt = datetime.fromtimestamp(int(raw_str) / 1000, tz=timezone.utc)
+            return dt.strftime("%b %d, %Y %I:%M %p UTC")
+        except (ValueError, OSError):
+            return raw_str
+    try:
+        dt = datetime.fromisoformat(raw_str.replace("Z", "+00:00"))
+        return dt.strftime("%b %d, %Y %I:%M %p UTC")
+    except ValueError:
+        return raw_str
+
+
 def send_slack_alert(new_matches):
     if not SLACK_WEBHOOK_URL:
         print("SLACK_WEBHOOK_URL not set — skipping Slack send, printing instead:", file=sys.stderr)
         for job in new_matches:
-            print(f"  - {job['title']} @ {job['company']} ({job['location']}) {job['url']}")
+            print(f"  - {job['title']} @ {job['company']} ({job['location']}) "
+                  f"[posted {_format_posted_at(job.get('updated_at'))}] {job['url']}")
         return
 
     lines = [f"*{len(new_matches)} new matching posting(s):*"]
     for job in new_matches[:20]:  # cap message size
-        lines.append(f"• <{job['url']}|{job['title']}> — {job['company']} ({job['location']})")
+        posted = _format_posted_at(job.get("updated_at"))
+        lines.append(f"• <{job['url']}|{job['title']}> — {job['company']} ({job['location']}) — posted {posted}")
     if len(new_matches) > 20:
         lines.append(f"...and {len(new_matches) - 20} more.")
 

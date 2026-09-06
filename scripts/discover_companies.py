@@ -52,12 +52,27 @@ BOARD_PATTERNS = {
 }
 
 # Search terms tuned toward what you're actually hiring-watching for,
-# not a generic crawl of every company on each ATS.
+# not a generic crawl of every company on each ATS. Deliberately broader
+# than a couple of terms -- the discovery mechanism itself doesn't care
+# whether a company is "tech" or not, so covering more of config.json's
+# target roles surfaces non-tech companies hiring for them too, not just
+# the obvious tech employers. At ~40 queries/day across 3 platforms this
+# still stays well under Brave's 2,000/month free tier.
 SEARCH_TERMS = [
     "internship",
+    "new grad",
     "electrical engineer intern",
+    "hardware engineer intern",
+    "firmware intern",
+    "embedded systems intern",
     "machine learning intern",
-    "new grad software",
+    "ai engineer intern",
+    "data science intern",
+    "data engineer intern",
+    "computer vision intern",
+    "robotics intern",
+    "controls engineer intern",
+    "signal processing intern",
 ]
 
 
