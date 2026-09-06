@@ -28,7 +28,6 @@ jobs:
         working-directory: scripts
         env:
           SEARCH_API_KEY: ${{ secrets.SEARCH_API_KEY }}
-          SEARCH_ENGINE_ID: ${{ secrets.SEARCH_ENGINE_ID }}
         run: python discover_companies.py
 
       - name: Commit new companies

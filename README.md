@@ -24,12 +24,10 @@ you the posting the moment it's live — no aggregator lag, no LinkedIn delay.
 2. **Add repo secrets** (Settings → Secrets and variables → Actions):
    - `SLACK_WEBHOOK_URL` — an incoming webhook URL for the Slack channel
      you want alerts in.
-   - `SEARCH_API_KEY` and `SEARCH_ENGINE_ID` — (optional, for auto-discovery)
-     credentials for a Google Programmable Search Engine
-     (https://programmablesearchengine.google.com/): `SEARCH_API_KEY` is a
-     Custom Search JSON API key, `SEARCH_ENGINE_ID` is the search engine's
-     `cx` value. Free tier is 100 queries/day; this pipeline uses ~12/week.
-     Want a different search provider instead? Only `search_web()` in
+   - `SEARCH_API_KEY` — (optional, for auto-discovery) a Brave Search API
+     subscription token from https://api.search.brave.com/app/keys. Free
+     tier is 2,000 queries/month; this pipeline uses ~12/week. Want a
+     different search provider instead? Only `search_web()` in
      `discover_companies.py` needs to change.
 
 3. **Edit `config.json`** to match your actual target roles/locations.
