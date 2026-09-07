@@ -75,7 +75,9 @@
     "bandwidth",
     "rti",
     "supernal",
-    "rocketlab"
+    "rocketlab",
+    "carbon",
+    "Mill"
   ],
   "lever": [
     "Aprio",
@@ -133,7 +135,9 @@
     "daniels-sharpsmart",
     "tri",
     "ekimetrics",
-    "alice-bob"
+    "alice-bob",
+    "MachinaLabs",
+    "epifi"
   ],
   "ashby": [
     "ramp",
@@ -218,7 +222,10 @@
     "chalice",
     "zip",
     "hadrian-automation",
-    "se3"
+    "se3",
+    "aistudio",
+    "charge-robotics",
+    "primeintellect"
   ],
   "workday": [],
   "_meta": {
