@@ -77,7 +77,8 @@
     "supernal",
     "rocketlab",
     "carbon",
-    "Mill"
+    "Mill",
+    "xometry"
   ],
   "lever": [
     "Aprio",
@@ -137,7 +138,8 @@
     "ekimetrics",
     "alice-bob",
     "MachinaLabs",
-    "epifi"
+    "epifi",
+    "binance"
   ],
   "ashby": [
     "ramp",
@@ -225,7 +227,10 @@
     "se3",
     "aistudio",
     "charge-robotics",
-    "primeintellect"
+    "primeintellect",
+    "georgian",
+    "confluent",
+    "ready"
   ],
   "workday": [],
   "_meta": {
