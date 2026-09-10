@@ -78,7 +78,9 @@
     "rocketlab",
     "carbon",
     "Mill",
-    "xometry"
+    "xometry",
+    "offerup",
+    "samsungresearchamerica"
   ],
   "lever": [
     "Aprio",
@@ -139,7 +141,8 @@
     "alice-bob",
     "MachinaLabs",
     "epifi",
-    "binance"
+    "binance",
+    "ifm-us"
   ],
   "ashby": [
     "ramp",
@@ -231,7 +234,8 @@
     "georgian",
     "confluent",
     "ready",
-    "revel"
+    "revel",
+    "polymarket"
   ],
   "workday": [],
   "_meta": {
