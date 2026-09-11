@@ -80,7 +80,8 @@
     "Mill",
     "xometry",
     "offerup",
-    "samsungresearchamerica"
+    "samsungresearchamerica",
+    "hudl"
   ],
   "lever": [
     "Aprio",
@@ -235,7 +236,8 @@
     "confluent",
     "ready",
     "revel",
-    "polymarket"
+    "polymarket",
+    "marsorobotics"
   ],
   "workday": [],
   "_meta": {
