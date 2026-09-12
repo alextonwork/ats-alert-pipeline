@@ -143,7 +143,9 @@
     "MachinaLabs",
     "epifi",
     "binance",
-    "ifm-us"
+    "ifm-us",
+    "cardiosense",
+    "immuta"
   ],
   "ashby": [
     "ramp",
@@ -237,7 +239,8 @@
     "ready",
     "revel",
     "polymarket",
-    "marsorobotics"
+    "marsorobotics",
+    "conveo"
   ],
   "workday": [],
   "_meta": {
