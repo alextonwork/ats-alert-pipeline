@@ -82,7 +82,9 @@
     "offerup",
     "samsungresearchamerica",
     "hudl",
-    "planetlabs"
+    "planetlabs",
+    "bayada",
+    "wpp"
   ],
   "lever": [
     "Aprio",
@@ -241,7 +243,8 @@
     "revel",
     "polymarket",
     "marsorobotics",
-    "conveo"
+    "conveo",
+    "Ridealso"
   ],
   "workday": [],
   "_meta": {
