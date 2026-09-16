@@ -251,9 +251,9 @@
   "_meta": {
     "note": "This is a small starter seed, not the full target list. Add any company you personally know about by appending its ATS slug (found in its careers URL) to the right array. The discover_companies.py script also appends new slugs here automatically after validating them.",
     "dead_slugs": {
-      "lever:calstart": 7,
-      "lever:ledger": 5,
-      "greenhouse:postman": 1
+      "lever:calstart": 8,
+      "lever:ledger": 6,
+      "greenhouse:postman": 2
     },
     "removed_dead_slugs": [
       {
