@@ -130,7 +130,6 @@
     "kitware",
     "woven-by-toyota",
     "rai",
-    "calstart",
     "skyways",
     "GoToGroup",
     "rivr",
@@ -251,9 +250,8 @@
   "_meta": {
     "note": "This is a small starter seed, not the full target list. Add any company you personally know about by appending its ATS slug (found in its careers URL) to the right array. The discover_companies.py script also appends new slugs here automatically after validating them.",
     "dead_slugs": {
-      "lever:calstart": 9,
-      "lever:ledger": 7,
-      "greenhouse:postman": 3
+      "lever:ledger": 8,
+      "greenhouse:postman": 4
     },
     "removed_dead_slugs": [
       {
@@ -284,6 +282,11 @@
       {
         "platform": "lever",
         "slug": "rippling",
+        "reason": "exceeded failure threshold"
+      },
+      {
+        "platform": "lever",
+        "slug": "calstart",
         "reason": "exceeded failure threshold"
       }
     ]
