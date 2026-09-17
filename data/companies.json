@@ -84,7 +84,9 @@
     "hudl",
     "planetlabs",
     "bayada",
-    "wpp"
+    "wpp",
+    "launchdarkly",
+    "singlestore"
   ],
   "lever": [
     "Aprio",
@@ -147,7 +149,8 @@
     "binance",
     "ifm-us",
     "cardiosense",
-    "immuta"
+    "immuta",
+    "crestoperations"
   ],
   "ashby": [
     "ramp",
@@ -244,7 +247,9 @@
     "marsorobotics",
     "conveo",
     "Ridealso",
-    "junipersquare"
+    "junipersquare",
+    "perplexity",
+    "sesame"
   ],
   "workday": [],
   "_meta": {
