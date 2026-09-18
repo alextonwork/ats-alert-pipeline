@@ -85,7 +85,8 @@
     "bayada",
     "wpp",
     "launchdarkly",
-    "singlestore"
+    "singlestore",
+    "ripple"
   ],
   "lever": [
     "Aprio",
@@ -148,7 +149,8 @@
     "ifm-us",
     "cardiosense",
     "immuta",
-    "crestoperations"
+    "crestoperations",
+    "life"
   ],
   "ashby": [
     "ramp",
@@ -247,7 +249,9 @@
     "Ridealso",
     "junipersquare",
     "perplexity",
-    "sesame"
+    "sesame",
+    "ibotta",
+    "Antares"
   ],
   "workday": [],
   "_meta": {
