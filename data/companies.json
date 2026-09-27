@@ -156,7 +156,8 @@
     "layup",
     "drivetrain",
     "neighbor",
-    "dreamgames"
+    "dreamgames",
+    "shyftlabs"
   ],
   "ashby": [
     "ramp",
@@ -263,7 +264,8 @@
     "outersignal",
     "Meraki-Labs",
     "julius",
-    "almetra"
+    "almetra",
+    "helion"
   ],
   "workday": [],
   "_meta": {
