@@ -88,7 +88,10 @@
     "singlestore",
     "ripple",
     "twiliostudents",
-    "antora"
+    "antora",
+    "weissassetmanagement",
+    "thirdpoleinc",
+    "impinjexternal"
   ],
   "lever": [
     "Aprio",
@@ -157,7 +160,9 @@
     "drivetrain",
     "neighbor",
     "dreamgames",
-    "shyftlabs"
+    "shyftlabs",
+    "dozee",
+    "tutorintelligence"
   ],
   "ashby": [
     "ramp",
@@ -266,7 +271,13 @@
     "julius",
     "almetra",
     "helion",
-    "gen-digital"
+    "gen-digital",
+    "Terranova",
+    "genesis-molecular-ai",
+    "Flock",
+    "signal-ai",
+    "allen-control-systems",
+    "brightstar-ai"
   ],
   "workday": [],
   "_meta": {
