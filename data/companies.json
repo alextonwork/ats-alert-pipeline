@@ -164,7 +164,9 @@
     "shyftlabs",
     "dozee",
     "tutorintelligence",
-    "scaleway"
+    "scaleway",
+    "vevo",
+    "nuvacore"
   ],
   "ashby": [
     "ramp",
@@ -279,7 +281,8 @@
     "Flock",
     "signal-ai",
     "allen-control-systems",
-    "brightstar-ai"
+    "brightstar-ai",
+    "dexmate"
   ],
   "workday": [],
   "_meta": {
