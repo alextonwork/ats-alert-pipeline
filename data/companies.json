@@ -57,7 +57,6 @@
     "sesamm",
     "skyryse",
     "torcrobotics",
-    "wayve",
     "impact",
     "lightmatter",
     "redwoodmaterials",
@@ -287,9 +286,7 @@
   "workday": [],
   "_meta": {
     "note": "This is a small starter seed, not the full target list. Add any company you personally know about by appending its ATS slug (found in its careers URL) to the right array. The discover_companies.py script also appends new slugs here automatically after validating them.",
-    "dead_slugs": {
-      "greenhouse:wayve": 9
-    },
+    "dead_slugs": {},
     "removed_dead_slugs": [
       {
         "platform": "greenhouse",
@@ -334,6 +331,11 @@
       {
         "platform": "greenhouse",
         "slug": "postman",
+        "reason": "exceeded failure threshold"
+      },
+      {
+        "platform": "greenhouse",
+        "slug": "wayve",
         "reason": "exceeded failure threshold"
       }
     ]
